@@ -15,7 +15,7 @@ export function GetStartedSection() {
             </p>
             <Link
               href="#contact"
-              className="inline-block rounded-[6px] bg-[#C3FFFC] px-5 py-2 font-[GlacialIndifferenc] text-base text-[#001C55]"
+              className="inline-block rounded-[6px] bg-[#C3FFFC] px-7 py-4 font-[GlacialIndifferenc] text-base text-[#001C55] hover:bg-[#C3FFFC]/90 hover:shadow-lg"
             >
               Je démarre
             </Link>

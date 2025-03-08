@@ -55,7 +55,7 @@ export function TestimonialsSection() {
   return (
     <section className="bg-[#E7F3FE] py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-16 text-center text-3xl font-bold text-black md:text-4xl">
+        <h2 className="mb-16 text-center text-3xl font-[GlacialIndifferenc] text-[#001C55] md:text-4xl">
           Découvrez ce que nos consultants pensent vraiment de Bridge !
         </h2>
 

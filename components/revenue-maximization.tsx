@@ -11,8 +11,8 @@ const features = [
       "Un conseiller dédié vous suit à chaque étape, disponible pour échanger selon vos besoins. Réactif et à l'écoute, il vous guide dans vos décisions stratégiques et financières.",
     icon: Users,
     bgColor: 'bg-[#d9d9d9]',
-    iconBg: 'bg-[#90CDF4]/30',
-    iconColor: 'text-[#BEE3F8]',
+    iconBg: 'bg-[#ffffff]',
+    iconColor: 'text-[#000000]',
     borderColor: 'border-[#90CDF4]/30',
     titleColor: 'text-[#1A365D]', // Couleur du titre
     descriptionColor: 'text-[#2D3748]', // Couleur de la description
@@ -23,8 +23,8 @@ const features = [
       'Gardez le contrôle total de vos revenus avec notre approche adaptée. Anticipez vos charges, évitez les fluctuations imprévues et optimisez votre rémunération pour une stabilité financière durable.',
     icon: Sliders,
     bgColor: 'bg-[#0a2472]',
-    iconBg: 'bg-[#63B3ED]/30',
-    iconColor: 'text-[#BEE3F8]',
+    iconBg: 'bg-[#a6e1fa]',
+    iconColor: 'text-[#000000]',
     borderColor: 'border-[#63B3ED]/30',
     titleColor: 'text-[#ffffff]',
     descriptionColor: 'text-[#ffffff]',
@@ -35,8 +35,8 @@ const features = [
       "Vos besoins évoluent, votre stratégie s'adapte. Nous ajustons en permanence notre approche pour aligner votre rémunération avec vos priorités changeantes.",
     icon: TrendingUp,
     bgColor: 'bg-[#001c55]',
-    iconBg: 'bg-[#4FD1C5]/30',
-    iconColor: 'text-[#B2F5EA]',
+    iconBg: 'bg-[#0e6ba8]',
+    iconColor: 'text-[#ffffff]',
     borderColor: 'border-[#4FD1C5]/30',
     titleColor: 'text-[#ffffff]',
     descriptionColor: 'text-[#ffffff]',
@@ -50,7 +50,7 @@ export function RevenueMaximization() {
     <div className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 space-y-4 text-center">
-          <h2 className="font-[GlacialIndifferenc] text-3xl text-[#2D3748] md:text-4xl">
+          <h2 className="font-[GlacialIndifferenc] text-3xl text-[#001C55] md:text-4xl">
             Maximisez vos revenus avec un suivi personnalisé
           </h2>
           <p className="mx-auto max-w-2xl font-[GlacialIndifferenc] text-gray-600">
