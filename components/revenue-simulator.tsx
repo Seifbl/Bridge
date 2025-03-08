@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
