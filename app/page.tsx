@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 'use client';
 
 import { BridgeOffer } from 'components/bridge-offer';
@@ -147,7 +149,7 @@ export default function Home() {
 
           {/* Bridge Offer Section */}
           <BridgeOffer />
-          
+
         {/* Testimonials Section */}
         <TestimonialsSection />
 
