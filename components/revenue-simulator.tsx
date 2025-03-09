@@ -1,15 +1,15 @@
-/* eslint-disable prettier/prettier */
-
 'use client';
 
 import * as Slider from '@radix-ui/react-slider';
 import { Edit3 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export function RevenueSimulator() {
   const [dailyRate, setDailyRate] = useState(500);
   const [daysPerMonth, setDaysPerMonth] = useState(15);
-  const [netRevenue, setNetRevenue] = useState(0);
+  const [netRevenue, setNetRevenue] = useState(0); // Valeur réelle calculée après "Simuler"
+  const [simulatedRevenue, setSimulatedRevenue] = useState<number | null>(null);
+
 
   const optimizations = [
     ['Titres-restaurant', 'Participation aux vacances'],
@@ -18,11 +18,11 @@ export function RevenueSimulator() {
     ['Chèques emploi service', 'Voyages professionnels'],
   ];
 
-  useEffect(() => {
+  const handleSimulation = () => {
     const monthlyGross = dailyRate * daysPerMonth;
     const estimatedNet = monthlyGross * 0.7;
-    setNetRevenue(Math.round(estimatedNet));
-  }, [dailyRate, daysPerMonth]);
+    setSimulatedRevenue(Math.round(estimatedNet)); // Stocker le résultat uniquement au clic
+  };
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -43,9 +43,7 @@ export function RevenueSimulator() {
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
                     value={[dailyRate]}
-                    onValueChange={(value) =>
-                      setDailyRate(value[0] ?? dailyRate)
-                    }
+                    onValueChange={(value) => setDailyRate(value[0] ?? dailyRate)}
                     max={1500}
                     min={100}
                     step={50}
@@ -62,12 +60,9 @@ export function RevenueSimulator() {
                     <input
                       type="number"
                       value={dailyRate}
-                      onChange={(e) =>
-                        setDailyRate(Number(e.target.value) || dailyRate)
-                      }
+                      onChange={(e) => setDailyRate(Number(e.target.value) || dailyRate)}
                       className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
-
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                       <span className="text-black">€/jour</span>
                     </div>
@@ -83,9 +78,7 @@ export function RevenueSimulator() {
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
                     value={[daysPerMonth]}
-                    onValueChange={(value) =>
-                      setDaysPerMonth(value[0] ?? daysPerMonth)
-                    }
+                    onValueChange={(value) => setDaysPerMonth(value[0] ?? daysPerMonth)}
                     max={22}
                     min={1}
                     step={1}
@@ -99,13 +92,10 @@ export function RevenueSimulator() {
                     <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
                       <Edit3 className="size-4 text-gray-400" />
                     </div>
-
                     <input
                       type="number"
                       value={daysPerMonth}
-                      onChange={(e) =>
-                        setDaysPerMonth(Number(e.target.value) || daysPerMonth)
-                      }
+                      onChange={(e) => setDaysPerMonth(Number(e.target.value) || daysPerMonth)}
                       className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
@@ -115,7 +105,10 @@ export function RevenueSimulator() {
                 </div>
               </div>
 
-              <button className="w-full rounded-[6px] bg-[#C3FFFC] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#001C55] shadow-md transition-colors hover:scale-105 hover:bg-[#C3FFFC]/90 hover:shadow-lg md:w-auto">
+              <button
+                onClick={handleSimulation}
+                className="w-full rounded-[6px] bg-[#C3FFFC] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#001C55] shadow-md transition-colors hover:scale-105 hover:bg-[#C3FFFC]/90 hover:shadow-lg md:w-auto"
+              >
                 Simuler
               </button>
             </div>
@@ -127,21 +120,22 @@ export function RevenueSimulator() {
               <h3 className="text-xl font-bold text-gray-300">
                 Revenu net optimisé :
               </h3>
-              <p className="text-4xl font-bold text-[#F9FFB4]">
-                {netRevenue.toLocaleString()} €
-              </p>
+              {simulatedRevenue !== null ? (
+                <p className="text-4xl font-bold text-[#F9FFB4]">
+                  {simulatedRevenue.toLocaleString()} €
+                </p>
+              ) : (
+                <p className="text-lg text-gray-400">Cliquez sur "Simuler" pour voir le résultat</p>
+              )}
             </div>
 
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-gray-300">
-                Optimisations inclues :
+                Optimisations incluses :
               </h3>
               <div className="grid grid-cols-1 gap-x-8 gap-y-2 md:grid-cols-2">
                 {optimizations.map(([left, right], index) => (
-                  <div
-                    key={index}
-                    className="col-span-2 grid grid-cols-2 gap-8"
-                  >
+                  <div key={index} className="col-span-2 grid grid-cols-2 gap-8">
                     <div className="flex items-center gap-2">
                       <div className="size-1.5 rounded-full bg-[#C3FFFC]" />
                       <span className="text-sm text-gray-300">{left}</span>
@@ -155,10 +149,7 @@ export function RevenueSimulator() {
               </div>
             </div>
 
-            <button
-              className="ml-[108px] w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#F9FFB4] 
-            shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg  md:w-auto" style={{ marginTop: '45px' }}
-            >
+            <button className="w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#F9FFB4] shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg md:w-auto">
               Contacter un conseiller
             </button>
           </div>
