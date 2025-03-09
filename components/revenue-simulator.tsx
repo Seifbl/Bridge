@@ -127,7 +127,8 @@ export function RevenueSimulator() {
                   {simulatedRevenue.toLocaleString()} €
                 </p>
               ) : (
-                <p className="text-lg text-gray-400">Cliquez sur "Simuler" pour voir le résultat</p>
+                <p className="text-lg text-gray-400">Cliquez sur &quot;Simuler&quot; pour voir le résultat</p>
+
               )}
             </div>
 
@@ -151,7 +152,8 @@ export function RevenueSimulator() {
               </div>
             </div>
 
-            <button className="w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#F9FFB4] shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg md:w-auto">
+            <button className="w-full md:w-auto rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] text-[#F9FFB4] font-medium shadow-md transition-colors hover:border-[#C3FFFC] hover:bg-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg"
+            >
               Contacter un conseiller
             </button>
           </div>

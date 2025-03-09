@@ -111,7 +111,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block mt-[-50px] ml-[170px] w-[750px] h-[750px] mx-auto">
+            <div className="relative hidden lg:block mx-auto mt-[-50px] ml-[170px] size-[750px]">
   <Image
     src="/Bridge.png"
     alt="Illustration de portage salarial"
@@ -120,6 +120,7 @@ export default function Home() {
     className="rounded-lg"
   />
 </div>
+
 
 
           </div>
