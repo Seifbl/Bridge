@@ -7,7 +7,7 @@ import { useState } from 'react';
 export function RevenueSimulator() {
   const [dailyRate, setDailyRate] = useState(500);
   const [daysPerMonth, setDaysPerMonth] = useState(15);
-  const [netRevenue, setNetRevenue] = useState(0); // Valeur réelle calculée après "Simuler"
+ 
   const [simulatedRevenue, setSimulatedRevenue] = useState<number | null>(null);
 
 
