@@ -50,18 +50,18 @@ export default function Home() {
           }`}
         >
           <nav className="container mx-auto flex items-center justify-between p-4">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
               {/* Logo */}
               <Image
                 src="/logo.png"
                 alt="Bridge Logo"
-                width={30} // Ajuste la taille
-                height={40}
-                className="size-auto"
+                width={25} // Ajuste la taille
+                height={25}
+                
               />
 
               {/* Texte "Bridge" */}
-              <span className="text-2xl font-bold text-white">Bridge</span>
+              <span className="text-2xl font-nunito text-white  mt-[3px]  ">Bridge</span>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -73,7 +73,7 @@ export default function Home() {
               </Link>
               <Link
                 href="#contact"
-                className="rounded-[6px] border border-[#F9FFB4] px-4 py-2 font-[GlacialIndifferenc] text-sm font-medium text-[#F9FFB4] transition-colors hover:border-[#C3FFFC] hover:bg-[#C3FFFC] hover:text-[#000B45] "
+                className="rounded-[6px] border border-[#F9FFB4] px-4 py-2 font-[GlacialIndifferenc] text-sm font-medium text-[#ffffff] transition-colors hover:border-[#C3FFFC] hover:bg-[#C3FFFC] hover:text-[#000B45] "
               >
                 Contactez-nous
               </Link>
@@ -95,10 +95,9 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="max-w-2xl font-[GlacialIndifferenc] text-lg text-gray-300">
-                  Profitez d&apos;une stratégie d&apos;optimisation de revenus,
-                  gérée par un conseiller dédié, adaptée à votre situation et
-                  qui évolue selon vos priorités.
+                  Profitez d'une stratégie d'optimisation de revenus, gérée par un conseiller dédié, adaptée à votre situation et qui évolue selon vos priorités.
                 </p>
+                <p className="max-w-2xl font-[GlacialIndifferenc] text-lg text-gray-300"> Avec Bridge, vous êtes Satisfait ou Remboursé.</p>
               </div>
 
               <div className="flex flex-col gap-4 sm:flex-row">
@@ -111,15 +110,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block mx-auto mt-[-50px] ml-[170px] size-[750px]">
-  <Image
-    src="/Bridge.png"
-    alt="Illustration de portage salarial"
-    width={750}
-    height={750}
-    className="rounded-lg"
-  />
-</div>
+            <div className="relative hidden lg:block">
+              <Image
+                src="/Bridge.png"
+                alt="Illustration de portage salarial"
+                width={500}
+                height={500}
+                className="mx-auto h-auto w-full rounded-lg "
+              />
+            </div>
 
 
 
@@ -156,7 +155,70 @@ export default function Home() {
 
         {/* Get Started Section */}
         <GetStartedSection />
+
+        
+         {/* Footer */}
+         <footer className="bg-[#E7F3FE] py-4">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          <div className="text-gray-400 text-sm font-[GlacialIndifferenc] ml-[-150px]">© 2025 Bridge, Inc.</div>
+          <div className="flex items-center gap-6 mr-[-150px] ">
+            <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+              </svg>
+            </Link>
+            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </Link>
+            <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </footer>
+    
       </main>
     </div>
+    
   );
 }

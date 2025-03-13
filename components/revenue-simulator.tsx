@@ -152,7 +152,9 @@ export function RevenueSimulator() {
               </div>
             </div>
 
-            <button className="w-full md:w-auto rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] text-[#F9FFB4] font-medium shadow-md transition-colors hover:border-[#C3FFFC] hover:bg-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg"
+            <button
+            className="ml-[108px]  w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#ffffff] 
+            shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg  md:w-auto" style={{ marginTop: '55px' }}
             >
               Contacter un conseiller
             </button>

@@ -59,8 +59,8 @@ export function BridgeOffer() {
             <div className="flex justify-center lg:col-span-3">
               <div className="flex size-56 flex-col items-center justify-center rounded-full border-2 border-[#F9FFB4] bg-transparent shadow-lg transition-transform hover:scale-105">
                 <span className="text-6xl font-bold text-white">5%</span>
-                <span className="mt-2 px-4 text-center text-sm text-white">
-                  du chiffre d&apos;affaires HT
+                <span className="mt-2 px-4 text-center text-lg  font-bold  text-white">
+                  du chiffre <br></br> d&apos;affaires HT
                 </span>
               </div>
             </div>
@@ -85,7 +85,7 @@ export function BridgeOffer() {
           <div className="mt-16 flex justify-center">
             <Link
               href="#simulator"
-              className="rounded-[6px] bg-[#C3FFFC] px-12 py-4 text-lg font-medium text-[#001C55] shadow-md transition-all hover:scale-105 hover:bg-[#C3FFFC]/90 hover:shadow-lg"
+              className="rounded-[6px] bg-[#C3FFFC] px-12 py-4 text-lg font-bold font-[GlacialIndifferenc] text-[#001C55] shadow-md transition-all hover:scale-105 hover:bg-[#C3FFFC]/90 hover:shadow-lg"
             >
               Simuler mon salaire
             </Link>

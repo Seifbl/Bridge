@@ -10,12 +10,12 @@ const features = [
     description:
       "Un conseiller dédié vous suit à chaque étape, disponible pour échanger selon vos besoins. Réactif et à l'écoute, il vous guide dans vos décisions stratégiques et financières.",
     icon: Users,
-    bgColor: 'bg-[#d9d9d9]',
+    bgColor: 'bg-[#0a2472]',
     iconBg: 'bg-[#ffffff]',
     iconColor: 'text-[#000000]',
     borderColor: 'border-[#90CDF4]/30',
-    titleColor: 'text-[#1A365D]', // Couleur du titre
-    descriptionColor: 'text-[#2D3748]', // Couleur de la description
+    titleColor: 'text-[#ffffff]', // Couleur du titre
+    descriptionColor: 'text-[#ffffff]', // Couleur de la description
   },
   {
     title: 'Stratégie sur-mesure',
@@ -34,7 +34,7 @@ const features = [
     description:
       "Vos besoins évoluent, votre stratégie s'adapte. Nous ajustons en permanence notre approche pour aligner votre rémunération avec vos priorités changeantes.",
     icon: TrendingUp,
-    bgColor: 'bg-[#001c55]',
+    bgColor: 'bg-[#0a2472]',
     iconBg: 'bg-[#0e6ba8]',
     iconColor: 'text-[#ffffff]',
     borderColor: 'border-[#4FD1C5]/30',
