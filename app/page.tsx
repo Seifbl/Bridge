@@ -95,8 +95,9 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="max-w-2xl font-[GlacialIndifferenc] text-lg text-gray-300">
-                  Profitez d'une stratégie d'optimisation de revenus, gérée par un conseiller dédié, adaptée à votre situation et qui évolue selon vos priorités.
-                </p>
+  Profitez d&apos;une stratégie d&apos;optimisation de revenus, gérée par un conseiller dédié, adaptée à votre situation et qui évolue selon vos priorités.
+</p>
+
                 <p className="max-w-2xl font-[GlacialIndifferenc] text-lg text-gray-300">
   Avec Bridge, vous êtes Satisfait ou Remboursé&nbsp;!
 </p>
