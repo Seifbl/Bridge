@@ -11,9 +11,11 @@ import { TestimonialsSection } from 'components/testimonials-section';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { ContactFormModal } from 'components/contact-form-modal';
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,12 +73,12 @@ export default function Home() {
               >
                 Faire une simulation
               </Link>
-              <Link
-                href="#contact"
-                className="rounded-[6px] border border-[#F9FFB4] px-4 py-2 font-[GlacialIndifferenc] text-sm font-medium text-[#ffffff] transition-colors hover:border-[#C3FFFC] hover:bg-[#C3FFFC] hover:text-[#000B45] "
+              <button
+                onClick={() => setIsContactModalOpen(true)}
+                className="rounded-[6px] border border-[#F9FFB4] px-4 py-2 font-[GlacialIndifferenc] text-sm font-medium text-[#ffffff] transition-colors hover:border-[#C3FFFC] hover:bg-[#C3FFFC] hover:text-[#000B45]"
               >
                 Contactez-nous
-              </Link>
+              </button>
             </div>
           </nav>
         </header>
@@ -221,6 +223,10 @@ export default function Home() {
       </footer>
     
       </main>
+      <ContactFormModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </div>
     
   );
