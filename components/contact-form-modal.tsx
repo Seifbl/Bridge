@@ -1,6 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable simple-import-sort/imports */
-
 "use client"
 
 import type React from "react"
@@ -26,7 +23,27 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  if (!isOpen) return null
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Empêche la redirection
+
+    try {
+      const response = await fetch("https://formspree.io/f/mkgjgzrn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true); // Affiche le message de confirmation
+      } else {
+        alert("Une erreur est survenue. Veuillez réessayer.");
+      }
+    } catch (error) {
+      alert("Erreur de connexion. Vérifiez votre connexion internet.");
+    }
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
@@ -37,7 +54,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
           boxShadow: "0 10px 25px rgba(0, 0, 0, 0.5)",
         }}
       >
-        {/* Header avec titre */}
         <div className="relative px-6 py-4 text-center">
           <h3 className="text-xl font-bold text-white">
             {isSubmitted ? "Merci pour votre message !" : "Contactez-nous"}
@@ -51,7 +67,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
           </button>
         </div>
 
-        {/* Ligne de séparation avec dégradé */}
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C3FFFC]/50 to-transparent"></div>
 
         {isSubmitted ? (
@@ -69,16 +84,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             </button>
           </div>
         ) : (
-          <form
-            action="https://formspree.io/f/mkgjgzrn"
-            method="POST"
-            onSubmit={(event) => {
-              event.preventDefault(); // Empêche le rechargement immédiat
-              setIsSubmitted(true); // Affiche le message de confirmation
-              event.currentTarget.submit(); // Soumet le formulaire manuellement
-            }}
-            className="p-6"
-          >
+          <form onSubmit={handleSubmit} className="p-6">
             <div className="space-y-4">
               <div>
                 <label htmlFor="prenom" className="mb-1 block text-sm font-medium text-white/90">
@@ -140,7 +146,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
               </div>
             </div>
 
-            {/* Bouton d'envoi */}
             <div className="mt-6 flex justify-center">
               <button
                 type="submit"
