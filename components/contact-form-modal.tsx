@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 "use client"
 
 import type React from "react"
