@@ -120,7 +120,7 @@ export function TestimonialsSection() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`size-2.5 rounded-full transition-all ${
-                  index === currentIndex ? "w-8 bg-[#001C55]" : "bg-[#929292] hover:bg-white/70"
+                  index === currentIndex ? "w-8 bg-[#001C55]" : "bg-[#d6d6d6] hover:bg-white/70"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

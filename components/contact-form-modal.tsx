@@ -1,8 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
-import { X, Send, CheckCircle } from "lucide-react"
+
+import { useState, useEffect } from "react"
+import { X, CheckCircle } from "lucide-react"
+import PhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
 
 interface ContactFormModalProps {
   isOpen: boolean
@@ -17,68 +20,74 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
     message: "",
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [phoneInputLoaded, setPhoneInputLoaded] = useState(false)
+
+  // Couleur bleue principale
+  const primaryBlue = "#001C55"
+
+  useEffect(() => {
+    // S'assurer que le composant PhoneInput est chargé côté client
+    setPhoneInputLoaded(true)
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handlePhoneChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, telephone: value }))
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Empêche la redirection
+    event.preventDefault()
 
     try {
       const response = await fetch("https://formspree.io/f/mkgjgzrn", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      });
+      })
 
       if (response.ok) {
-        setIsSubmitted(true); // Affiche le message de confirmation
+        setIsSubmitted(true)
       } else {
-        alert("Une erreur est survenue. Veuillez réessayer.");
+        alert("Une erreur est survenue. Veuillez réessayer.")
       }
     } catch (error) {
-      alert("Erreur de connexion. Vérifiez votre connexion internet.");
+      alert("Erreur de connexion. Vérifiez votre connexion internet.")
     }
-  };
+  }
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-      <div
-        className="relative w-full max-w-md overflow-hidden rounded-xl shadow-2xl"
-        style={{
-          background: "linear-gradient(145deg, #001C55 0%, #001240 100%)",
-          boxShadow: "0 10px 25px rgba(0, 0, 0, 0.5)",
-        }}
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="relative w-full max-w-lg overflow-hidden rounded-md bg-white shadow-md">
+        {/* Header avec croix de fermeture */}
         <div className="relative px-6 py-4 text-center">
-          <h3 className="text-xl font-bold text-white">
+          <h3 className="text-xl font-medium text-gray-800">
             {isSubmitted ? "Merci pour votre message !" : "Contactez-nous"}
           </h3>
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 rounded-full bg-white/10 p-1 text-white/80 transition-all hover:bg-white/20 hover:text-white"
+            className="absolute right-4 top-4 rounded-full p-1 text-gray-400 transition-all hover:text-gray-600"
             aria-label="Fermer"
           >
             <X size={20} />
           </button>
         </div>
 
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C3FFFC]/50 to-transparent"></div>
-
         {isSubmitted ? (
-          <div className="p-6 text-center text-white">
-            <CheckCircle size={48} className="mx-auto text-[#C3FFFC]" />
-            <p className="mt-4 text-lg">Nous avons bien reçu votre message.</p>
-            <p className="text-sm text-white/70">
-              Nous vous répondrons dans les plus brefs délais.
-            </p>
+          <div className="p-8 text-center">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50">
+              <CheckCircle size={32} className="text-blue-600" />
+            </div>
+            <p className="mt-4 text-lg font-medium text-gray-800">Nous avons bien reçu votre message.</p>
+            <p className="mt-2 text-sm text-gray-500">Nous vous répondrons dans les plus brefs délais.</p>
             <button
               onClick={onClose}
-              className="mt-6 rounded-lg bg-[#C3FFFC] px-6 py-2 font-medium text-[#001C55] shadow-lg transition-all hover:shadow-[#C3FFFC]/20 hover:shadow-xl"
+              className="mt-6 w-full rounded-md bg-[#001C55] px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-[#001C55]/90"
             >
               Fermer
             </button>
@@ -87,8 +96,8 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
           <form onSubmit={handleSubmit} className="p-6">
             <div className="space-y-4">
               <div>
-                <label htmlFor="prenom" className="mb-1 block text-sm font-medium text-white/90">
-                  Prénom
+                <label htmlFor="prenom" className="mb-1 block text-sm font-medium text-gray-700">
+                  Prénom <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="prenom"
@@ -96,13 +105,14 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                   value={formData.prenom}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-white placeholder-white/40 backdrop-blur-sm transition-all focus:border-[#C3FFFC] focus:outline-none focus:ring-1 focus:ring-[#C3FFFC]"
+                  placeholder="Votre prénom"
+                  className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-1 block text-sm font-medium text-white/90">
-                  E-mail
+                <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="email"
@@ -111,28 +121,43 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-white placeholder-white/40 backdrop-blur-sm transition-all focus:border-[#C3FFFC] focus:outline-none focus:ring-1 focus:ring-[#C3FFFC]"
+                  placeholder="votre.email@exemple.fr"
+                  className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
                 />
               </div>
 
               <div>
-                <label htmlFor="telephone" className="mb-1 block text-sm font-medium text-white/90">
-                  Téléphone
+                <label htmlFor="telephone" className="mb-1 block text-sm font-medium text-gray-700">
+                  Téléphone <span className="text-red-500">*</span>
                 </label>
-                <input
-                  id="telephone"
-                  name="telephone"
-                  type="tel"
-                  value={formData.telephone}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-white placeholder-white/40 backdrop-blur-sm transition-all focus:border-[#C3FFFC] focus:outline-none focus:ring-1 focus:ring-[#C3FFFC]"
-                />
+                {phoneInputLoaded && (
+                  <PhoneInput
+                    country={"fr"}
+                    value={formData.telephone}
+                    onChange={handlePhoneChange}
+                    inputProps={{
+                      name: "telephone",
+                      required: true,
+                      className: "w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800",
+                    }}
+                    containerClass="phone-input-container"
+                    buttonClass="phone-input-button"
+                    dropdownClass="phone-input-dropdown"
+                    containerStyle={{
+                      width: "100%",
+                    }}
+                    inputStyle={{
+                      width: "100%",
+                      height: "40px",
+                      fontSize: "16px",
+                    }}
+                  />
+                )}
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-1 block text-sm font-medium text-white/90">
-                  Message
+                <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">
+                  Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -141,19 +166,23 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-white placeholder-white/40 backdrop-blur-sm transition-all focus:border-[#C3FFFC] focus:outline-none focus:ring-1 focus:ring-[#C3FFFC]"
+                  placeholder="Votre message..."
+                  className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
                 />
+              </div>
+
+              <div className="mt-2 text-xs text-gray-500">
+                En cliquant sur "envoyer", vous acceptez les conditions d'utilisation et la politique de
+                confidentialité.
               </div>
             </div>
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6">
               <button
                 type="submit"
-                className="group relative flex items-center justify-center overflow-hidden rounded-lg bg-[#C3FFFC] px-8 py-3 font-medium text-[#001C55] shadow-lg transition-all hover:shadow-[#C3FFFC]/20 hover:shadow-xl"
+                className="w-full rounded-md bg-[#001C55] px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-[#001C55]/90"
               >
-                <span className="mr-2">Envoyer</span>
-                <Send size={18} />
-                <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform group-hover:translate-x-0"></div>
+                Envoyer
               </button>
             </div>
           </form>
@@ -162,3 +191,4 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
     </div>
   )
 }
+

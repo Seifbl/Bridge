@@ -1,30 +1,40 @@
 /* eslint-disable prettier/prettier */
 
-'use client';
+"use client"
 
-import * as Slider from '@radix-ui/react-slider';
-import { Edit3 } from 'lucide-react';
-import { useState } from 'react';
+import * as Slider from "@radix-ui/react-slider"
+import { Edit3 } from "lucide-react"
+import { useState } from "react"
+import { ContactFormModal } from "./contact-form-modal" // Importez le composant de formulaire
 
 export function RevenueSimulator() {
-  const [dailyRate, setDailyRate] = useState(500);
-  const [daysPerMonth, setDaysPerMonth] = useState(15);
- 
-  const [simulatedRevenue, setSimulatedRevenue] = useState<number | null>(null);
-
+  const [dailyRate, setDailyRate] = useState(500)
+  const [daysPerMonth, setDaysPerMonth] = useState(15)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+  const [simulatedRevenue, setSimulatedRevenue] = useState<number | null>(null)
 
   const optimizations = [
-    ['Titres-restaurant', 'Participation aux vacances'],
-    ['Chèques cadeaux', 'Compensations de télétravail'],
-    ['Chèques culture', 'Formation professionnelle'],
-    ['Chèques emploi service', 'Voyages professionnels'],
-  ];
+    ["Titres-restaurant", "Participation aux vacances"],
+    ["Chèques cadeaux", "Compensations de télétravail"],
+    ["Chèques culture", "Formation professionnelle"],
+    ["Chèques emploi service", "Voyages professionnels"],
+  ]
 
   const handleSimulation = () => {
-    const monthlyGross = dailyRate * daysPerMonth;
-    const estimatedNet = monthlyGross * 0.7;
-    setSimulatedRevenue(Math.round(estimatedNet)); // Stocker le résultat uniquement au clic
-  };
+    const monthlyGross = dailyRate * daysPerMonth
+    const estimatedNet = monthlyGross * 0.7
+    setSimulatedRevenue(Math.round(estimatedNet)) // Stocker le résultat uniquement au clic
+  }
+
+  // Fonction pour ouvrir le modal
+  const openContactModal = () => {
+    setIsContactModalOpen(true)
+  }
+
+  // Fonction pour fermer le modal
+  const closeContactModal = () => {
+    setIsContactModalOpen(false)
+  }
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -38,9 +48,7 @@ export function RevenueSimulator() {
 
             <div className="space-y-6">
               <div className="space-y-4">
-                <label className="block text-sm font-medium text-gray-300">
-                  Prix facturé / jour (TJM)
-                </label>
+                <label className="block text-sm font-medium text-white">Prix facturé / jour (TJM)</label>
                 <div className="flex items-center gap-4">
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
@@ -73,9 +81,7 @@ export function RevenueSimulator() {
               </div>
 
               <div className="space-y-4">
-                <label className="block text-sm font-medium text-gray-300">
-                  Nombre de jours à facturer
-                </label>
+                <label className="block text-sm font-medium text-white">Nombre de jours à facturer</label>
                 <div className="flex items-center gap-4">
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
@@ -119,33 +125,26 @@ export function RevenueSimulator() {
           {/* Colonne de droite */}
           <div className="space-y-8">
             <div className="space-y-2">
-              <h3 className="text-xl font-bold text-gray-300">
-                Revenu net optimisé :
-              </h3>
+              <h3 className="text-xl font-bold text-white">Revenu net optimisé :</h3>
               {simulatedRevenue !== null ? (
-                <p className="text-4xl font-bold text-[#F9FFB4]">
-                  {simulatedRevenue.toLocaleString()} €
-                </p>
+                <p className="text-4xl font-bold text-[#F9FFB4]">{simulatedRevenue.toLocaleString()} €</p>
               ) : (
-                <p className="text-lg text-gray-400">Cliquez sur &quot;Simuler&quot; pour voir le résultat</p>
-
+                <p className="text-lg text-white">Cliquez sur &quot;Simuler&quot; pour voir le résultat</p>
               )}
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-300">
-                Optimisations incluses :
-              </h3>
+              <h3 className="text-xl font-bold text-white">Optimisations incluses :</h3>
               <div className="grid grid-cols-1 gap-x-8 gap-y-2 md:grid-cols-2">
                 {optimizations.map(([left, right], index) => (
                   <div key={index} className="col-span-2 grid grid-cols-2 gap-8">
                     <div className="flex items-center gap-2">
                       <div className="size-1.5 rounded-full bg-[#C3FFFC]" />
-                      <span className="text-sm text-gray-300">{left}</span>
+                      <span className="text-sm text-white">{left}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="size-1.5 rounded-full bg-[#C3FFFC]" />
-                      <span className="text-sm text-gray-300">{right}</span>
+                      <span className="text-sm text-white">{right}</span>
                     </div>
                   </div>
                 ))}
@@ -153,14 +152,20 @@ export function RevenueSimulator() {
             </div>
 
             <button
-            className="ml-[108px]  w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#ffffff] 
-            shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg  md:w-auto" style={{ marginTop: '55px' }}
+              onClick={openContactModal}
+              className="ml-[108px] w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#ffffff] 
+              shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg md:w-auto"
+              style={{ marginTop: "55px" }}
             >
               Contacter un conseiller
             </button>
           </div>
         </div>
       </div>
+
+      {/* Intégration du formulaire de contact */}
+      <ContactFormModal isOpen={isContactModalOpen} onClose={closeContactModal} />
     </div>
-  );
+  )
 }
+
