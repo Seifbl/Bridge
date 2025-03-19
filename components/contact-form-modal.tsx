@@ -22,8 +22,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [phoneInputLoaded, setPhoneInputLoaded] = useState(false)
 
-  // Couleur bleue principale
-  const primaryBlue = "#001C55"
+ 
 
   useEffect(() => {
     // S'assurer que le composant PhoneInput est chargé côté client
