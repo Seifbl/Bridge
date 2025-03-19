@@ -22,8 +22,8 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const [entry] = entries
-        if (entry.isIntersecting) {
+        const entry = entries[0]
+        if (entry && entry.isIntersecting) {
           setIsVisible(true)
           // Redémarrer l'animation en changeant la clé
           setAnimationKey((prev) => prev + 1)
