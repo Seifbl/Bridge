@@ -1,12 +1,11 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { X, CheckCircle } from "lucide-react"
 import PhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
-// test
+
 interface ContactFormModalProps {
   isOpen: boolean
   onClose: () => void
@@ -21,8 +20,6 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [phoneInputLoaded, setPhoneInputLoaded] = useState(false)
-
- 
 
   useEffect(() => {
     // S'assurer que le composant PhoneInput est chargé côté client
@@ -62,12 +59,10 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg overflow-hidden rounded-md bg-white shadow-md">
+      <div className="relative w-full max-w-xl overflow-hidden rounded-2xl bg-white shadow-md">
         {/* Header avec croix de fermeture */}
         <div className="relative px-6 py-4 text-center">
-          <h3 className="text-xl font-medium text-gray-800">
-            {isSubmitted ? "Merci pour votre message !" : "Contactez-nous"}
-          </h3>
+          <h3 className="text-xl font-medium text-gray-800">{isSubmitted ? "Merci pour votre message !" : ""}</h3>
           <button
             onClick={onClose}
             className="absolute right-4 top-4 rounded-full p-1 text-gray-400 transition-all hover:text-gray-600"
@@ -86,7 +81,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
             <p className="mt-2 text-sm text-gray-500">Nous vous répondrons dans les plus brefs délais.</p>
             <button
               onClick={onClose}
-              className="mt-6 w-full rounded-md bg-[#001C55] px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-[#001C55]/90"
+              className="mt-6 w-full rounded-xl bg-[#001C55] px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-[#001C55]/90"
             >
               Fermer
             </button>
@@ -105,7 +100,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                   onChange={handleChange}
                   required
                   placeholder="Votre prénom"
-                  className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
                 />
               </div>
 
@@ -121,7 +116,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                   onChange={handleChange}
                   required
                   placeholder="votre.email@exemple.fr"
-                  className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
                 />
               </div>
 
@@ -137,7 +132,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                     inputProps={{
                       name: "telephone",
                       required: true,
-                      className: "w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800",
+                      className: "w-full rounded-xl border border-gray-300 px-4 py-2 text-gray-800",
                     }}
                     containerClass="phone-input-container"
                     buttonClass="phone-input-button"
@@ -147,8 +142,14 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
                     }}
                     inputStyle={{
                       width: "100%",
-                      height: "40px",
+                      height: "42px",
                       fontSize: "16px",
+                      paddingLeft: "80px", // Increased from 60px to 80px for more space
+                    }}
+                    buttonStyle={{
+                      padding: "0 18px",
+                      borderRadius: "12px 0 0 12px", // Updated from 8px to 12px to match rounded-xl
+                      width: "70px", // Added explicit width to give more space for the flag
                     }}
                   />
                 )}
@@ -156,30 +157,24 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
 
               <div>
                 <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">
-                  Message <span className="text-red-500">*</span>
+                  Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  required
                   rows={4}
                   placeholder="Votre message..."
-                  className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-2 text-gray-800 placeholder-gray-400 transition-all focus:border-[#001C55] focus:outline-none focus:ring-1 focus:ring-[#001C55]"
                 />
-              </div>
-
-              <div className="mt-2 text-xs text-gray-500">
-                En cliquant sur "envoyer", vous acceptez les conditions d'utilisation et la politique de
-                confidentialité.
               </div>
             </div>
 
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full rounded-md bg-[#001C55] px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-[#001C55]/90"
+                className="w-full rounded-xl bg-[#001C55] px-6 py-3 font-medium text-white shadow-sm transition-all hover:bg-[#001C55]/90"
               >
                 Envoyer
               </button>
