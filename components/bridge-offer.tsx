@@ -33,11 +33,11 @@ const benefits = [
   },
   {
     icon: Users,
-    text: 'Accès au comité d&apos;entreprise',
+    text: 'Accès au comité d’entreprise ',
   },
   {
     icon: Heart,
-    text: 'Mutuelle d&apos;entreprise négociée',
+    text: 'Mutuelle d’entreprise négociée ',
   },
   {
     icon: Sparkles,

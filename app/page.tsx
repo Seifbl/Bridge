@@ -38,13 +38,13 @@ export default function Home() {
   }
 
   const partnerLogos = [
-    { name: "Logo 1", src: "/sephora.png" },
-    { name: "Logo 2", src: "/decathlon.png" },
-    { name: "Logo 3", src: "/engie.png" },
-    { name: "Logo 4", src: "/channel.png" },
-    { name: "Logo 5", src: "/total.png" },
-    { name: "Logo 6", src: "/LB_Logo-Blue-BIG-ConvertImage.png" },
-    { name: "Logo 7", src: "/axa.png" },
+    { name: "Logo 1", src: "/sephora.png", width: 150, height: 90 },
+    { name: "Logo 2", src: "/decathlon.png", width: 200, height: 90 },
+    { name: "Logo 3", src: "/engie.png", width: 200, height: 90 },
+    { name: "Logo 4", src: "/channel.png", width: 100, height: 90 },
+    { name: "Logo 5", src: "/total.png", width: 120, height: 90 },
+    { name: "Logo 6", src: "/LB_Logo-Blue-BIG-ConvertImage.png", width: 190, height: 95 },
+    { name: "Logo 7", src: "/axa.png", width: 70, height: 70 },
   ]
 
   return (

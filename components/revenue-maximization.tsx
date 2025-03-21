@@ -6,9 +6,9 @@ import { useState } from 'react';
 
 const features = [
   {
-    title: 'Accompagnement personnalisé',
+    title: 'Accompagnement ',
     description:
-      "Un conseiller dédié vous suit à chaque étape, disponible pour échanger selon vos besoins. Réactif et à l'écoute, il vous guide dans vos décisions stratégiques et financières.",
+      "En tant que consultant en portage salarial, vous bénéficiez d’un conseiller dédié qui vous accompagne à chaque étape. Il vous conseille dans vos décisions stratégiques et financières et reste disponible pour répondre à vos questions selon vos besoins.",
     icon: Users,
     bgColor: 'bg-[#0a2472]',
     iconBg: 'bg-[#ffffff]',
@@ -18,9 +18,9 @@ const features = [
     descriptionColor: 'text-[#ffffff]', // Couleur de la description
   },
   {
-    title: 'Stratégie sur-mesure',
+    title: 'Sur mesure',
     description:
-      'Gardez le contrôle total de vos revenus avec notre approche adaptée. Anticipez vos charges, évitez les fluctuations imprévues et optimisez votre rémunération pour une stabilité financière durable.',
+      'Gardez le contrôle total de vos revenus grâce à notre stratégie sur-mesure. Anticipez vos charges, évitez les fluctuations imprévues et profitez d’une optimisation fiscale et des frais professionnels en portage salarial pour une stabilité financière durable.',
     icon: Sliders,
     bgColor: 'bg-[#0a2472]',
     iconBg: 'bg-[#ffffff]',
@@ -30,9 +30,9 @@ const features = [
     descriptionColor: 'text-[#ffffff]',
   },
   {
-    title: 'Ajustement continu',
+    title: 'Ajustement ',
     description:
-      "Vos besoins évoluent, votre stratégie s'adapte. Nous ajustons en permanence notre approche pour aligner votre rémunération avec vos priorités changeantes.",
+      "Vos besoins évoluent ? Votre stratégie aussi. Nous ajustons en continu notre approche pour aligner votre rémunération avec vos priorités et vous aider à anticiper les éventuels risques du portage salarial.",
     icon: TrendingUp,
     bgColor: 'bg-[#0a2472]',
     iconBg: 'bg-[#ffffff]',

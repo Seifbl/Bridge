@@ -43,7 +43,7 @@ export function RevenueSimulator() {
           {/* Colonne de gauche */}
           <div className="space-y-8">
             <h2 className="text-2xl font-bold text-white md:text-3xl">
-              Estimez vos revenus nets après impôts avec Bridge
+            Simulez votre salaire net en portage salarial avec Bridge 
             </h2>
 
             <div className="space-y-6">

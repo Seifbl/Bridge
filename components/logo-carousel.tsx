@@ -7,6 +7,8 @@ import { motion } from "framer-motion"
 interface Logo {
   name: string
   src: string
+  width?: number
+  height?: number
 }
 
 interface LogoCarouselProps {
@@ -25,8 +27,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
         const entry = entries[0]
         if (entry && entry.isIntersecting) {
           setIsVisible(true)
-          // Redémarrer l'animation en changeant la clé
-          setAnimationKey((prev) => prev + 1)
+          setAnimationKey((prev) => prev + 1) // Redémarrer l'animation
         } else {
           setIsVisible(false)
         }
@@ -34,7 +35,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.1, // Déclencher quand au moins 10% du carrousel est visible
+        threshold: 0.1,
       },
     )
 
@@ -54,10 +55,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 },
     },
   }
 
@@ -66,18 +64,14 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
+      transition: { type: "spring", stiffness: 100, damping: 10 },
     },
   }
 
   return (
     <div className="relative overflow-hidden py-10" ref={carouselRef}>
       <motion.div
-        key={animationKey} // Utiliser une clé pour forcer le redémarrage de l'animation
+        key={animationKey}
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}
         variants={containerVariants}
@@ -88,14 +82,18 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
             <motion.div
               key={index}
               variants={logoVariants}
-              className="mx-4 inline-flex w-[200px] items-center justify-center"
+              className="mx-4 inline-flex items-center justify-center"
+              style={{
+                width: logo.width ? `${logo.width}px` : "200px",
+                height: logo.height ? `${logo.height}px` : "100px",
+              }}
             >
               <Image
                 src={logo.src || "/placeholder.svg"}
                 alt={logo.name}
-                width={180}
-                height={90}
-                className="max-h-24 w-auto object-contain filter hover:brightness-110 transition-all duration-300"
+                width={logo.width || 180}
+                height={logo.height || 90}
+                className="object-contain filter hover:brightness-110 transition-all duration-300"
               />
             </motion.div>
           ))}
@@ -132,4 +130,3 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
     </div>
   )
 }
-

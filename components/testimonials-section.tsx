@@ -1,42 +1,28 @@
-/* eslint-disable prettier/prettier */
-
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { useState } from "react"
 
 interface Testimonial {
   name: string
   role: string
-  image: string
   quote: string
   company: string
 }
 
 const testimonials: Testimonial[] = [
   {
-    name: "Sarah Martin",
+    name: "Abdelghani Chaffai",
     role: "Développement",
-    image: "/placeholder.svg?height=400&width=400",
     quote:
-      "&quot;Bridge m&apos;a permis de me concentrer sur mes projets tout en optimisant mes revenus. Leur accompagnement est vraiment personnalisé et professionnel.&quot;",
-    company: "Tech Solutions",
+      "J'ai connu Bridge via un ami qui m'a recommandé l'entreprise, après plusieurs échanges avec eux, j'ai pris la décision de signer avec Bridge en Décembre 2023 pour la suite de mon aventure, et je peux affirmer que je ne le regrette pas du tout! Ce que j'apprécie chez bridge c'est le sens de l'écoute, la réactivité et le professionnalisme des différentes personnes au quotidien, j'en suis plus que satisfait et je n'hésiterai pas à recommander cette entreprise à mon entourage.",
+    company: " Decathlon Digital",
   },
   {
-    name: "Thomas Dubois",
-    role: "Chef de projet",
-    image: "/placeholder.svg?height=400&width=400",
-    quote:
-      "&quot;La flexibilité et la transparence de Bridge sont exceptionnelles. Je recommande vivement leur service à tous les professionnels indépendants.&quot;",
-    company: "Digital Innovation",
-  },
-  {
-    name: "Marie Lambert",
+    name: "Nouha Sghiri",
     role: "Business Analyst",
-    image: "/placeholder.svg?height=400&width=400",
     quote:
-      "&quot;Un accompagnement sur mesure qui répond parfaitement à mes besoins. Bridge a vraiment changé ma façon de travailler en freelance.&quot;",
+      "Ce que j’apprécie particulièrement chez Bridge c’est la simplicité et la transparence des démarches, ainsi que l’accompagnement personnalisé. L’équipe est toujours disponible et très réactive, ce qui m’a permis de me concentrer pleinement sur mes missions en toute sérénité.  C’est un réel confort de collaborer avec une structure qui a une approche humaine et chaleureuse, qui comprend les besoins des freelances et facilite la gestion administrative",
     company: "Finance Corp",
   },
 ]
@@ -53,7 +39,7 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section className="bg-[#E7F3FE] py-16 md:py-24">
+    <section className="bg-[#E7F3FE] py-16 md:py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="mb-16 text-center text-3xl font-[GlacialIndifferenc] text-[#001C55] md:text-4xl">
           Découvrez ce que nos consultants pensent vraiment de Bridge !
@@ -67,27 +53,36 @@ export function TestimonialsSection() {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="w-full shrink-0 px-4">
-                  <div className="mx-auto max-w-4xl rounded-xl bg-white p-8 shadow-xl md:p-10">
-                    <div className="flex flex-col items-center gap-8 md:flex-row">
-                      <div className="relative size-32 overflow-hidden rounded-full border-4 border-[#C3FFFC] md:size-40">
-                        <Image
-                          src={testimonial.image || "/placeholder.svg"}
-                          alt={testimonial.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="flex-1 text-center md:text-left">
-                        <p
-                          className="mb-6 text-lg italic text-gray-700 md:text-xl"
-                          dangerouslySetInnerHTML={{
-                            __html: testimonial.quote,
-                          }}
-                        />
-                        <div className="space-y-1">
-                          <h3 className="text-xl font-semibold text-[#001C55]">{testimonial.name}</h3>
-                          <p className="text-gray-600">{testimonial.role}</p>
-                          <p className="font-medium text-[#0A2472]">{testimonial.company}</p>
+                  <div className="mx-auto max-w-4xl rounded-xl bg-white p-8 md:p-12 shadow-xl relative">
+                    {/* Decorative elements */}
+                    <div className="absolute top-6 left-6 text-[#C3FFFC] opacity-20">
+                      <Quote size={60} className="rotate-180" />
+                    </div>
+                    <div className="absolute bottom-6 right-6 text-[#C3FFFC] opacity-20">
+                      <Quote size={60} />
+                    </div>
+
+                    {/* Border accent */}
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#001C55] to-[#0A2472] rounded-t-xl"></div>
+
+                    <div className="relative z-10">
+                      <div className="flex flex-col items-center">
+                        <div className="text-center max-w-3xl mx-auto">
+                          <p
+                            className="mb-8 text-xl md:text-2xl italic text-gray-700 leading-relaxed"
+                            dangerouslySetInnerHTML={{
+                              __html: testimonial.quote,
+                            }}
+                          />
+
+                          <div className="pt-6 border-t border-gray-100">
+                            <h3 className="text-xl font-bold text-[#001C55]">{testimonial.name}</h3>
+                            <div className="flex items-center justify-center gap-2 mt-1">
+                              <p className="text-gray-600">{testimonial.role}</p>
+                              <span className="text-[#0A2472] opacity-50">•</span>
+                              <p className="font-medium text-[#0A2472]">{testimonial.company}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -100,27 +95,27 @@ export function TestimonialsSection() {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-x-4 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-all hover:scale-110 hover:bg-gray-50 md:-translate-x-8"
+            className="absolute left-0 top-1/2 -translate-x-4 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition-all hover:scale-110 hover:bg-gray-50 md:-translate-x-8 focus:outline-none focus:ring-2 focus:ring-[#001C55] focus:ring-opacity-50"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="size-6 text-[#001C55]" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 rounded-full bg-white p-2 shadow-lg transition-all hover:scale-110 hover:bg-gray-50 md:translate-x-8"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 rounded-full bg-white p-3 shadow-lg transition-all hover:scale-110 hover:bg-gray-50 md:translate-x-8 focus:outline-none focus:ring-2 focus:ring-[#001C55] focus:ring-opacity-50"
             aria-label="Next testimonial"
           >
             <ChevronRight className="size-6 text-[#001C55]" />
           </button>
 
           {/* Dots indicator */}
-          <div className="mt-8 flex justify-center gap-2">
+          <div className="mt-10 flex justify-center gap-3">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`size-2.5 rounded-full transition-all ${
-                  index === currentIndex ? "w-8 bg-[#001C55]" : "bg-[#d6d6d6] hover:bg-white/70"
+                className={`h-3 rounded-full transition-all ${
+                  index === currentIndex ? "w-10 bg-[#001C55]" : "w-3 bg-[#d6d6d6] hover:bg-[#0A2472]/30"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
@@ -128,7 +123,6 @@ export function TestimonialsSection() {
           </div>
         </div>
       </div>
-      {/* test */}
     </section>
   )
 }
