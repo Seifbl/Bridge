@@ -54,8 +54,7 @@ export function RevenueMaximization() {
             Maximisez vos revenus avec un suivi personnalisé
           </h2>
           <p className="mx-auto max-w-2xl font-[GlacialIndifferenc] text-gray-600">
-            Notre approche personnalisée vous garantit une optimisation continue
-            de vos revenus
+          Notre approche personnalisée assure aux salariés portés une optimisation continue de leurs revenus.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -77,12 +76,13 @@ export function RevenueMaximization() {
                   <feature.icon className={`size-10 ${feature.iconColor}`} />
                 </div>
                 <h3
-                  className={`mb-6 font-[GlacialIndifferenc] text-2xl ${feature.titleColor}`}
+                  className={`mb-6 font-[GlacialIndifferenc] font-normal text-2xl ${feature.titleColor}`}
                 >
                   {feature.title}
                 </h3>
                 <p
-                  className={`grow font-[GlacialIndifferenc] text-lg leading-relaxed ${feature.descriptionColor}`}
+                  className={`grow font-[GlacialIndifferenc] font-normal text-lg leading-relaxed ${feature.descriptionColor}`}
+
                 >
                   {feature.description}
                 </p>

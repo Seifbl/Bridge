@@ -82,7 +82,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
             <motion.div
               key={index}
               variants={logoVariants}
-              className="mx-4 inline-flex items-center justify-center"
+              className="mx-8 inline-flex items-center justify-center"
               style={{
                 width: logo.width ? `${logo.width}px` : "200px",
                 height: logo.height ? `${logo.height}px` : "100px",

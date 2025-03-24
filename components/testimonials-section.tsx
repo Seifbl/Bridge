@@ -1,128 +1,334 @@
 "use client"
 
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
-import { useState } from "react"
-
-interface Testimonial {
-  name: string
-  role: string
-  quote: string
-  company: string
-}
-
-const testimonials: Testimonial[] = [
-  {
-    name: "Abdelghani Chaffai",
-    role: "Développement",
-    quote:
-      "J'ai connu Bridge via un ami qui m'a recommandé l'entreprise, après plusieurs échanges avec eux, j'ai pris la décision de signer avec Bridge en Décembre 2023 pour la suite de mon aventure, et je peux affirmer que je ne le regrette pas du tout! Ce que j'apprécie chez bridge c'est le sens de l'écoute, la réactivité et le professionnalisme des différentes personnes au quotidien, j'en suis plus que satisfait et je n'hésiterai pas à recommander cette entreprise à mon entourage.",
-    company: " Decathlon Digital",
-  },
-  {
-    name: "Nouha Sghiri",
-    role: "Business Analyst",
-    quote:
-      "Ce que j’apprécie particulièrement chez Bridge c’est la simplicité et la transparence des démarches, ainsi que l’accompagnement personnalisé. L’équipe est toujours disponible et très réactive, ce qui m’a permis de me concentrer pleinement sur mes missions en toute sérénité.  C’est un réel confort de collaborer avec une structure qui a une approche humaine et chaleureuse, qui comprend les besoins des freelances et facilite la gestion administrative",
-    company: "Finance Corp",
-  },
-]
+import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 
 export function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  // Example with more testimonials
+  const testimonials = [
+    {
+      quote:
+        "Ce que j’apprécie particulièrement chez Bridge c’est la simplicité et la transparence des démarches, ainsi que l’accompagnement personnalisé. L’équipe est toujours disponible et très réactive, ce qui m’a permis de me concentrer pleinement sur mes missions en toute sérénité. C’est un réel confort de collaborer avec une structure qui a une approche humaine et chaleureuse, qui comprend les besoins des freelances et facilite la gestion administrative",
+      name: "Nouha Sghiri",
+      title: "CTO, TechCorp",
+      image: "/placeholder.svg?height=60&width=60", // Replace with actual image path
+      initial: "N", // Added initial for first testimonial
+    },
+    {
+      quote:
+        "J'ai connu Bridge via un ami qui m'a recommandé l'entreprise, après plusieurs échanges avec eux, j'ai pris la décision de signer avec Bridge en Décembre 2023 pour la suite de mon aventure, et je peux affirmer que je ne le regrette pas du tout! Ce que j'apprécie chez bridge c'est le sens de l'écoute, la réactivité et le professionnalisme des différentes personnes au quotidien, j'en suis plus que satisfait et je n'hésiterai pas à recommander cette entreprise à mon entourage.",
+      name: "Abdelghani Chaffai",
+      title: "Operations Manager, Innovate Inc.",
+      image: "/placeholder.svg?height=60&width=60", // Replace with actual image path
+      initial: "A", // Added initial for first testimonial
+    },
+    {
+      quote:
+        "The analytics capabilities have given us insights we never had before. We can now make data-driven decisions with confidence, which has directly impacted our bottom line. The customizable dashboards allow each department to focus on their key metrics, while still maintaining a unified view of our business performance.",
+      name: "Emily Rodriguez",
+      title: "Data Analyst, Metrics Global",
+      image: "/placeholder.svg?height=60&width=60", // Replace with actual image path
+    },
+    {
+      quote:
+        "Implementation was seamless and the training resources provided were comprehensive. Our team was up and running in days, not weeks. The platform's intuitive design meant that even our less tech-savvy team members were comfortable using it almost immediately.",
+      name: "David Kim",
+      title: "Project Manager, Innovate Solutions",
+      image: "/placeholder.svg?height=60&width=60", // Replace with actual image path
+    },
+  ]
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-  }
+  // Track which testimonial is expanded
+  const [expandedIndex, setExpandedIndex] = useState(0)
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
-  }
+  // Reference to the scrollable container
+  const scrollContainerRef = useRef(null)
+
+  // Calculate the height needed to show exactly 2 testimonials
+  const [containerHeight, setContainerHeight] = useState("auto")
+  const firstTwoTestimonialsRef = useRef<HTMLDivElement | null>(null)
+
+  // Set the container height to show exactly 2 testimonials
+  useEffect(() => {
+    if (firstTwoTestimonialsRef.current) {
+      // Add a larger buffer (40px) to account for increased spacing
+      setContainerHeight(`${firstTwoTestimonialsRef.current.offsetHeight + 40}px`)
+    }
+  }, [])
+
+  // Couleur principale #E7F3FE
+  const mainColor = "#E7F3FE"
 
   return (
-    <section className="bg-[#E7F3FE] py-16 md:py-24 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-16 text-center text-3xl font-[GlacialIndifferenc] text-[#001C55] md:text-4xl">
-          Découvrez ce que nos consultants pensent vraiment de Bridge !
-        </h2>
+    <section className="py-16" style={{ backgroundColor: mainColor }}>
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="mb-12 text-center">
+          <h2 className="mb-16 text-center text-3xl font-[GlacialIndifferenc] text-[#001C55] md:text-4xl">Découvrez ce que nos consultants pensent vraiment de Bridge !
+          </h2>
+          
+        </div>
 
+        {/* Scrollable container without the blue frame */}
         <div className="relative">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="w-full shrink-0 px-4">
-                  <div className="mx-auto max-w-4xl rounded-xl bg-white p-8 md:p-12 shadow-xl relative">
-                    {/* Decorative elements */}
-                    <div className="absolute top-6 left-6 text-[#C3FFFC] opacity-20">
-                      <Quote size={60} className="rotate-180" />
-                    </div>
-                    <div className="absolute bottom-6 right-6 text-[#C3FFFC] opacity-20">
-                      <Quote size={60} />
-                    </div>
-
-                    {/* Border accent */}
-                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#001C55] to-[#0A2472] rounded-t-xl"></div>
-
-                    <div className="relative z-10">
-                      <div className="flex flex-col items-center">
-                        <div className="text-center max-w-3xl mx-auto">
-                          <p
-                            className="mb-8 text-xl md:text-2xl italic text-gray-700 leading-relaxed"
-                            dangerouslySetInnerHTML={{
-                              __html: testimonial.quote,
+          <div
+            ref={scrollContainerRef}
+            className="custom-scrollbar overflow-y-auto pr-4"
+            style={{
+              height: containerHeight,
+              scrollBehavior: "smooth",
+            }}
+          >
+            <div className="grid gap-8">
+              {/* First two testimonials in a separate ref to measure height */}
+              <div ref={firstTwoTestimonialsRef} className="space-y-8">
+                {testimonials.slice(0, 2).map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-lg overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+                    style={{
+                      borderRadius: "10px",
+                      marginBottom: index === 0 ? "2rem" : "0", // Add extra margin to first testimonial
+                    }}
+                    onClick={() => setExpandedIndex(index === expandedIndex ? -1 : index)}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        {/* Rounded image or initial */}
+                        <div className="relative">
+                          <div
+                            className={`
+                            absolute inset-0 rounded-full 
+                            ${expandedIndex === index ? "animate-pulse" : ""}
+                          `}
+                            style={{
+                              padding: "2px",
+                              backgroundColor: expandedIndex === index ? mainColor : "rgba(231, 243, 254, 0.5)",
                             }}
-                          />
+                          ></div>
 
-                          <div className="pt-6 border-t border-gray-100">
-                            <h3 className="text-xl font-bold text-[#001C55]">{testimonial.name}</h3>
-                            <div className="flex items-center justify-center gap-2 mt-1">
-                              <p className="text-gray-600">{testimonial.role}</p>
-                              <span className="text-[#0A2472] opacity-50">•</span>
-                              <p className="font-medium text-[#0A2472]">{testimonial.company}</p>
+                          {index === 0 && testimonial.initial ? (
+                            // Display initial "N" for first testimonial
+                            <div
+                              className="relative overflow-hidden rounded-full flex items-center justify-center bg-gray-100 text-gray-800 font-bold"
+                              style={{ width: "44px", height: "44px" }}
+                            >
+                              {testimonial.initial}
                             </div>
+                          ) : (
+                            // Display image for other testimonials
+                            <div
+                              className="relative overflow-hidden rounded-full"
+                              style={{ width: "44px", height: "44px" }}
+                            >
+                              <Image
+                                src={testimonial.image || "/placeholder.svg"}
+                                alt={testimonial.name}
+                                width={44}
+                                height={44}
+                                className="object-cover rounded-full"
+                              />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Name and title */}
+                        <div className="ml-3">
+                          <h3 className="font-medium text-gray-900">{testimonial.name}</h3>
+                          <p className="text-sm text-gray-600">{testimonial.title}</p>
+                        </div>
+
+                        {/* Expand/collapse indicator */}
+                        <div className="ml-auto">
+                          <div
+                            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                            style={{
+                              backgroundColor: expandedIndex === index ? mainColor : "rgba(231, 243, 254, 0.5)",
+                              color: expandedIndex === index ? "#333" : "#666",
+                            }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className={`h-5 w-5 transition-transform ${expandedIndex === index ? "rotate-180" : ""}`}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Testimonial content with max height animation */}
+                      <div
+                        className="overflow-hidden transition-all duration-500"
+                        style={{
+                          maxHeight: expandedIndex === index ? "500px" : "0",
+                          opacity: expandedIndex === index ? 1 : 0,
+                        }}
+                      >
+                        <div className="pt-2 pb-1">
+                          <div className="pl-4 text-gray-800" style={{ borderLeft: `4px solid ${mainColor}` }}>
+                            {testimonial.quote}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Additional testimonials */}
+              {testimonials.slice(2).map((testimonial, index) => {
+                const actualIndex = index + 2
+                return (
+                  <div
+                    key={actualIndex}
+                    className="bg-white rounded-lg overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer opacity-0 animate-fade-in"
+                    style={{
+                      animationDelay: `${index * 150}ms`,
+                      animationFillMode: "forwards",
+                      borderRadius: "10px",
+                    }}
+                    onClick={() => setExpandedIndex(actualIndex === expandedIndex ? -1 : actualIndex)}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        {/* Rounded image */}
+                        <div className="relative">
+                          <div
+                            className={`
+                            absolute inset-0 rounded-full 
+                            ${expandedIndex === actualIndex ? "animate-pulse" : ""}
+                          `}
+                            style={{
+                              padding: "2px",
+                              backgroundColor: expandedIndex === actualIndex ? mainColor : "rgba(231, 243, 254, 0.5)",
+                            }}
+                          ></div>
+                          <div
+                            className="relative overflow-hidden rounded-full"
+                            style={{ width: "44px", height: "44px" }}
+                          >
+                            <Image
+                              src={testimonial.image || "/placeholder.svg"}
+                              alt={testimonial.name}
+                              width={44}
+                              height={44}
+                              className="object-cover rounded-full"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Name and title */}
+                        <div className="ml-3">
+                          <h3 className="font-medium text-gray-900">{testimonial.name}</h3>
+                          <p className="text-sm text-gray-600">{testimonial.title}</p>
+                        </div>
+
+                        {/* Expand/collapse indicator */}
+                        <div className="ml-auto">
+                          <div
+                            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                            style={{
+                              backgroundColor: expandedIndex === actualIndex ? mainColor : "rgba(231, 243, 254, 0.5)",
+                              color: expandedIndex === actualIndex ? "#333" : "#666",
+                            }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className={`h-5 w-5 transition-transform ${expandedIndex === actualIndex ? "rotate-180" : ""}`}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Testimonial content with max height animation */}
+                      <div
+                        className="overflow-hidden transition-all duration-500"
+                        style={{
+                          maxHeight: expandedIndex === actualIndex ? "500px" : "0",
+                          opacity: expandedIndex === actualIndex ? 1 : 0,
+                        }}
+                      >
+                        <div className="pt-2 pb-1">
+                          <div className="pl-4 text-gray-800" style={{ borderLeft: `4px solid ${mainColor}` }}>
+                            {testimonial.quote}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-x-4 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition-all hover:scale-110 hover:bg-gray-50 md:-translate-x-8 focus:outline-none focus:ring-2 focus:ring-[#001C55] focus:ring-opacity-50"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="size-6 text-[#001C55]" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 rounded-full bg-white p-3 shadow-lg transition-all hover:scale-110 hover:bg-gray-50 md:translate-x-8 focus:outline-none focus:ring-2 focus:ring-[#001C55] focus:ring-opacity-50"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="size-6 text-[#001C55]" />
-          </button>
-
-          {/* Dots indicator */}
-          <div className="mt-10 flex justify-center gap-3">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-3 rounded-full transition-all ${
-                  index === currentIndex ? "w-10 bg-[#001C55]" : "w-3 bg-[#d6d6d6] hover:bg-[#0A2472]/30"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
+          {/* Subtle scroll shadow at the bottom */}
+          <div
+            className="absolute bottom-0 left-0 right-4 h-12 pointer-events-none"
+            style={{ background: `linear-gradient(to top, ${mainColor}, transparent)` }}
+          ></div>
         </div>
       </div>
+
+      {/* Styles for animations and custom scrollbar */}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 500ms ease forwards;
+        }
+        
+        /* Beautiful custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 20px;
+          margin: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #E7F3FE;
+          border-radius: 20px;
+          border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #E7F3FE;
+          opacity: 0.9;
+        }
+        
+        /* For Firefox */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #E7F3FE rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Hide scrollbar for mobile devices */
+        @media (max-width: 768px) {
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+          }
+        }
+      `}</style>
     </section>
   )
 }

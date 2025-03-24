@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 "use client"
 
 import * as Slider from "@radix-ui/react-slider"
@@ -43,7 +41,7 @@ export function RevenueSimulator() {
           {/* Colonne de gauche */}
           <div className="space-y-8">
             <h2 className="text-2xl font-bold text-white md:text-3xl">
-            Simulez votre salaire net en portage salarial avec Bridge 
+              Simulez votre salaire net en portage salarial avec Bridge
             </h2>
 
             <div className="space-y-6">
@@ -153,8 +151,8 @@ export function RevenueSimulator() {
 
             <button
               onClick={openContactModal}
-              className="ml-[108px] w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#ffffff] 
-              shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg md:w-auto"
+              className="w-full rounded-[6px] border border-[#F9FFB4] px-6 py-3 font-[GlacialIndifferenc] font-medium text-[#ffffff] 
+              shadow-md transition-colors hover:bg-[#C3FFFC] hover:border-[#C3FFFC] hover:text-[#000B45] hover:shadow-lg md:ml-[108px] md:w-auto"
               style={{ marginTop: "55px" }}
             >
               Contacter un conseiller

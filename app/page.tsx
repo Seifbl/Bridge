@@ -204,7 +204,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="bg-[#E7F3FE] py-4">
           <div className="container mx-auto flex items-center justify-between px-4">
-            <div className="font-[GlacialIndifferenc] text-sm text-gray-400">© 2025 Bridge, Tous droits réservés.</div>
+            <div className="font-[GlacialIndifferenc] text-sm text-gray-400">© Bridge 2025 , Tous droits réservés.</div>
             <div className="flex items-center gap-6">
               <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <svg
