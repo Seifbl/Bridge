@@ -66,7 +66,7 @@ export function BridgeOffer() {
             </div>
 
             {/* Liste des avantages en 2 colonnes et 4 lignes */}
-            <div className="grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2 lg:col-span-9">
+            <div className="grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2 lg:col-span-9 font-[GlacialIndifferenc]">
               {benefits.map((benefit, index) => (
                 <div
                   key={index}
