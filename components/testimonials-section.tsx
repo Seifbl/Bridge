@@ -46,26 +46,7 @@ export function TestimonialsSection() {
   const visibleCount = 2
 
   // Calculate if we can navigate forward or backward
-  const canGoBack = startIndex > 0
-  const canGoForward = startIndex + visibleCount < testimonials.length
-
-  // Navigation functions
-  const goToPrevious = () => {
-    if (canGoBack) {
-      setStartIndex(startIndex - visibleCount)
-      // Reset expanded index when navigating
-      setExpandedIndex(0)
-    }
-  }
-
-  const goToNext = () => {
-    if (canGoForward) {
-      setStartIndex(startIndex + visibleCount)
-      // Reset expanded index when navigating
-      setExpandedIndex(0)
-    }
-  }
-
+  
   // Get the currently visible testimonials
   const visibleTestimonials = testimonials.slice(startIndex, startIndex + visibleCount)
 
