@@ -3,11 +3,75 @@
 import * as Slider from "@radix-ui/react-slider"
 import { Edit3 } from "lucide-react"
 import { useState } from "react"
-import { ContactFormModal } from "./contact-form-modal" // Importez le composant de formulaire
+import { ContactFormModal } from "./contact-form-modal"
+function getTauxIRMensuel(salaireNetMensuel: number): number {
+  const tranches: [number, number, number][] = [
+    [0, 1620, 0],
+    [1620, 1683, 0.005],
+    [1683, 1791, 0.013],
+    [1791, 1911, 0.021],
+    [1911, 2042, 0.029],
+    [2042, 2151, 0.035],
+    [2151, 2294, 0.041],
+    [2294, 2714, 0.053],
+    [2714, 3107, 0.075],
+    [3107, 3539, 0.099],
+    [3539, 3983, 0.119],
+    [3983, 4648, 0.138],
+    [4648, 5574, 0.158],
+    [5574, 6974, 0.179],
+    [6974, 8711, 0.20],
+    [8711, 12091, 0.24],
+    [12091, 16376, 0.28],
+    [16376, 25706, 0.33],
+    [25706, 55062, 0.38],
+    [55062, Infinity, 0.43],
+  ];
+
+  for (const [min, max, taux] of tranches) {
+    if (salaireNetMensuel >= min && salaireNetMensuel < max) {
+      return taux;
+    }
+  }
+
+  return 0;
+}
+
+function calculateOptimizedNetRevenue(tjm: number, nbrJours: number): number {
+  const j = 34926;
+  const ppv = 3000;
+  const ca = tjm * nbrJours;
+  const dispoCa = ca * 0.95;
+  const dispoCaFicheDePaie = dispoCa - j;
+
+  const fraisDeFonctionnement = 14766;
+  const primeRC = 922.88;
+
+  const dispoCaPourSalaire = dispoCaFicheDePaie - fraisDeFonctionnement - primeRC - ppv;
+  const salaireBrut = dispoCaPourSalaire / 1.45;
+  const salaireNetAvantIR = salaireBrut * 0.786;
+  const salaireNetMensuelAvantIR = salaireNetAvantIR / 12;
+
+  // 👉 Appliquer TA logique : on trouve le taux en fonction du net mensuel
+  const tauxIR = getTauxIRMensuel(salaireNetMensuelAvantIR);
+  const salaireNetApresIR = salaireNetAvantIR * (1 - tauxIR);
+
+  const titresResto = nbrJours * 12.4;
+
+  const revenuAnnuel =
+    salaireNetApresIR + titresResto + ppv + primeRC + fraisDeFonctionnement + j;
+
+  const revenuMensuel = revenuAnnuel / 12;
+
+  return Math.round(revenuMensuel * 100) / 100;
+}
+
+
+
 
 export function RevenueSimulator() {
-  const [dailyRate, setDailyRate] = useState(500)
-  const [daysPerMonth, setDaysPerMonth] = useState(15)
+  const [dailyRate, setDailyRate] = useState(530)
+  const [daysPerYear, setDaysPerYear] = useState(216)
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const [simulatedRevenue, setSimulatedRevenue] = useState<number | null>(null)
 
@@ -19,20 +83,12 @@ export function RevenueSimulator() {
   ]
 
   const handleSimulation = () => {
-    const monthlyGross = dailyRate * daysPerMonth
-    const estimatedNet = monthlyGross * 0.7
-    setSimulatedRevenue(Math.round(estimatedNet)) // Stocker le résultat uniquement au clic
+    const revenu = calculateOptimizedNetRevenue(dailyRate, daysPerYear)
+    setSimulatedRevenue(revenu)
   }
 
-  // Fonction pour ouvrir le modal
-  const openContactModal = () => {
-    setIsContactModalOpen(true)
-  }
-
-  // Fonction pour fermer le modal
-  const closeContactModal = () => {
-    setIsContactModalOpen(false)
-  }
+  const openContactModal = () => setIsContactModalOpen(true)
+  const closeContactModal = () => setIsContactModalOpen(false)
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -79,14 +135,14 @@ export function RevenueSimulator() {
               </div>
 
               <div className="space-y-4">
-                <label className="block text-sm font-medium text-white">Nombre de jours à facturer</label>
+                <label className="block text-sm font-medium text-white">Nombre de jours à facturer (par an)</label>
                 <div className="flex items-center gap-4">
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
-                    value={[daysPerMonth]}
-                    onValueChange={(value) => setDaysPerMonth(value[0] ?? daysPerMonth)}
-                    max={22}
-                    min={1}
+                    value={[daysPerYear]}
+                    onValueChange={(value) => setDaysPerYear(value[0] ?? daysPerYear)}
+                    max={250}
+                    min={50}
                     step={1}
                   >
                     <Slider.Track className="relative h-1 grow rounded-full bg-gray-400">
@@ -100,12 +156,12 @@ export function RevenueSimulator() {
                     </div>
                     <input
                       type="number"
-                      value={daysPerMonth}
-                      onChange={(e) => setDaysPerMonth(Number(e.target.value) || daysPerMonth)}
+                      value={daysPerYear}
+                      onChange={(e) => setDaysPerYear(Number(e.target.value) || daysPerYear)}
                       className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                      <span className="text-black">j/mois</span>
+                      <span className="text-black">j/an</span>
                     </div>
                   </div>
                 </div>
@@ -166,4 +222,3 @@ export function RevenueSimulator() {
     </div>
   )
 }
-
