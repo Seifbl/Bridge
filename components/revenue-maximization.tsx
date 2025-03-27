@@ -10,7 +10,7 @@ const features = [
     description:
       "En tant que consultant en portage salarial, vous bénéficiez d’un conseiller dédié qui vous accompagne à chaque étape. Il vous conseille dans vos décisions stratégiques et financières et reste disponible pour répondre à vos questions selon vos besoins.",
     icon: Users,
-    bgColor: 'bg-[#0a2472]',
+    bgColor: 'bg-[#001C55]',
     iconBg: 'bg-[#ffffff]',
     iconColor: 'text-[#000000]',
     borderColor: 'border-[#90CDF4]/30',
@@ -22,7 +22,7 @@ const features = [
     description:
       'Gardez le contrôle total de vos revenus grâce à notre stratégie sur-mesure. Anticipez vos charges, évitez les fluctuations imprévues et profitez d’une optimisation fiscale et des frais professionnels en portage salarial pour une stabilité financière durable.',
     icon: Sliders,
-    bgColor: 'bg-[#0a2472]',
+    bgColor: 'bg-[#001C55]',
     iconBg: 'bg-[#ffffff]',
     iconColor: 'text-[#000000]',
     borderColor: 'border-[#63B3ED]/30',
@@ -34,7 +34,7 @@ const features = [
     description:
       "Vos besoins évoluent ? Votre stratégie aussi. Nous ajustons en continu notre approche pour aligner votre rémunération avec vos priorités et vous aider à anticiper les éventuels risques du portage salarial.",
     icon: TrendingUp,
-    bgColor: 'bg-[#0a2472]',
+    bgColor: 'bg-[#001C55]',
     iconBg: 'bg-[#ffffff]',
     iconColor: 'text-[#000000]',
     borderColor: 'border-[#4FD1C5]/30',

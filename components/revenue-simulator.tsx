@@ -44,15 +44,16 @@ function calculateOptimizedNetRevenue(tjm: number, nbrJours: number): number {
   const dispoCa = ca * 0.95;
   const dispoCaFicheDePaie = dispoCa - j;
 
-  const fraisDeFonctionnement = 14766;
-  const primeRC = 922.88;
+  const fraisDeFonctionnement = dispoCaFicheDePaie * 0.2; 
+
+  const primeRC = dispoCaFicheDePaie*0.0125;
 
   const dispoCaPourSalaire = dispoCaFicheDePaie - fraisDeFonctionnement - primeRC - ppv;
   const salaireBrut = dispoCaPourSalaire / 1.45;
   const salaireNetAvantIR = salaireBrut * 0.786;
   const salaireNetMensuelAvantIR = salaireNetAvantIR / 12;
 
-  // 👉 Appliquer TA logique : on trouve le taux en fonction du net mensuel
+
   const tauxIR = getTauxIRMensuel(salaireNetMensuelAvantIR);
   const salaireNetApresIR = salaireNetAvantIR * (1 - tauxIR);
 
