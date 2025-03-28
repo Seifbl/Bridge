@@ -206,7 +206,7 @@ export default function Home() {
           <div className="container mx-auto flex items-center justify-between px-4">
             <div className="font-[GlacialIndifferenc] text-sm text-gray-400">© Bridge 2025 , Tous droits réservés.</div>
             <div className="flex items-center gap-6">
-              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <Link href="https://www.facebook.com/profile.php?id=61574665409074&locale=fr_FR" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -222,7 +222,7 @@ export default function Home() {
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                 </svg>
               </Link>
-              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Link href="https://www.instagram.com/bridgeportage/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -240,7 +240,7 @@ export default function Home() {
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </Link>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Link href="https://www.linkedin.com/company/bridgeportage/about/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"

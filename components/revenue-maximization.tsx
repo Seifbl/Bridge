@@ -81,7 +81,7 @@ export function RevenueMaximization() {
                   {feature.title}
                 </h3>
                 <p
-                  className={`grow font-[GlacialIndifferenc] font-normal text-lg leading-relaxed ${feature.descriptionColor}`}
+                  className={`grow  font-normal text-lg leading-relaxed ${feature.descriptionColor}`}
 
                 >
                   {feature.description}

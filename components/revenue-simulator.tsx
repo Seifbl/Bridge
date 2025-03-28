@@ -136,7 +136,7 @@ export function RevenueSimulator() {
               </div>
 
               <div className="space-y-4">
-                <label className="block text-sm font-medium text-white">Nombre de jours à facturer (par an)</label>
+                <label className="block text-sm font-medium text-white">Nombre de jours à facturer </label>
                 <div className="flex items-center gap-4">
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
@@ -162,7 +162,7 @@ export function RevenueSimulator() {
                       className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                      <span className="text-black">j/an</span>
+                      <span className="text-black">j/mois</span>
                     </div>
                   </div>
                 </div>
