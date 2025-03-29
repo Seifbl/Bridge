@@ -2,6 +2,9 @@ import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
+import AnalyticsTracker from "components/AnalyticsTracker"
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -14,6 +17,8 @@ export const metadata: Metadata = {
   },
 }
 
+const GA_TRACKING_ID = "G-DNWJ71CBST"
+
 export default function RootLayout({
   children,
 }: {
@@ -21,8 +26,31 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <Script
+          id="ga-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+      </head>
+      <body className={inter.className}>
+        <AnalyticsTracker/>
+        {children}
+      </body>
     </html>
   )
 }
-

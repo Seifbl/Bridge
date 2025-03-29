@@ -4,6 +4,7 @@ import * as Slider from "@radix-ui/react-slider"
 import { Edit3 } from "lucide-react"
 import { useState } from "react"
 import { ContactFormModal } from "./contact-form-modal"
+
 function getTauxIRMensuel(salaireNetMensuel: number): number {
   const tranches: [number, number, number][] = [
     [0, 1620, 0],
@@ -37,42 +38,40 @@ function getTauxIRMensuel(salaireNetMensuel: number): number {
   return 0;
 }
 
-function calculateOptimizedNetRevenue(tjm: number, nbrJours: number): number {
+function calculateOptimizedNetRevenue(tjm: number, joursParMois: number): number {
   const j = 34926;
   const ppv = 3000;
-  const ca = tjm * nbrJours;
+  const joursParAn = joursParMois * 12;
+
+  const ca = tjm * joursParAn;
   const dispoCa = ca * 0.95;
   const dispoCaFicheDePaie = dispoCa - j;
 
-  const fraisDeFonctionnement = dispoCaFicheDePaie * 0.2; 
-
-  const primeRC = dispoCaFicheDePaie*0.0125;
+  const fraisDeFonctionnement = Math.round(dispoCaFicheDePaie * 0.2 * 100) / 100;
+  const primeRC = Math.round(dispoCaFicheDePaie * 0.0125 * 100) / 100;
 
   const dispoCaPourSalaire = dispoCaFicheDePaie - fraisDeFonctionnement - primeRC - ppv;
-  const salaireBrut = dispoCaPourSalaire / 1.45;
-  const salaireNetAvantIR = salaireBrut * 0.786;
+
+  const salaireBrut = Math.round((dispoCaPourSalaire / 1.45) * 100) / 100;
+  const salaireNetAvantIR = Math.round(salaireBrut * 0.786 * 100) / 100;
   const salaireNetMensuelAvantIR = salaireNetAvantIR / 12;
 
-
   const tauxIR = getTauxIRMensuel(salaireNetMensuelAvantIR);
-  const salaireNetApresIR = salaireNetAvantIR * (1 - tauxIR);
+  const salaireNetApresIR = Math.round(salaireNetAvantIR * (1 - tauxIR) * 100) / 100;
 
-  const titresResto = nbrJours * 12.4;
+  const titresResto = Math.round(joursParAn * 12.4 * 100) / 100;
 
   const revenuAnnuel =
     salaireNetApresIR + titresResto + ppv + primeRC + fraisDeFonctionnement + j;
 
-  const revenuMensuel = revenuAnnuel / 12;
+  const revenuMensuel = Math.round((revenuAnnuel / 12) * 100) / 100;
 
-  return Math.round(revenuMensuel * 100) / 100;
+  return revenuMensuel;
 }
-
-
-
 
 export function RevenueSimulator() {
   const [dailyRate, setDailyRate] = useState(530)
-  const [daysPerYear, setDaysPerYear] = useState(216)
+  const [daysPerMonth, setDaysPerMonth] = useState(18)
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const [simulatedRevenue, setSimulatedRevenue] = useState<number | null>(null)
 
@@ -84,13 +83,12 @@ export function RevenueSimulator() {
   ]
 
   const handleSimulation = () => {
-    const revenu = calculateOptimizedNetRevenue(dailyRate, daysPerYear)
+    const revenu = calculateOptimizedNetRevenue(dailyRate, daysPerMonth)
     setSimulatedRevenue(revenu)
   }
 
   const openContactModal = () => setIsContactModalOpen(true)
   const closeContactModal = () => setIsContactModalOpen(false)
-
   return (
     <div className="mx-auto max-w-6xl">
       <div className="rounded-xl bg-[#001C55] p-8 shadow-2xl md:p-12">
@@ -136,14 +134,17 @@ export function RevenueSimulator() {
               </div>
 
               <div className="space-y-4">
-                <label className="block text-sm font-medium text-white">Nombre de jours à facturer </label>
+              <label className="block text-sm font-medium text-white">
+  Nombre de jours à facturer <strong>(par mois)</strong>
+</label>
+
                 <div className="flex items-center gap-4">
                   <Slider.Root
                     className="relative flex h-5 w-full touch-none select-none items-center"
-                    value={[daysPerYear]}
-                    onValueChange={(value) => setDaysPerYear(value[0] ?? daysPerYear)}
-                    max={250}
-                    min={50}
+                    value={[daysPerMonth]}
+                    onValueChange={(value) => setDaysPerMonth(value[0] ?? daysPerMonth)}
+                    max={23}
+                    min={1}
                     step={1}
                   >
                     <Slider.Track className="relative h-1 grow rounded-full bg-gray-400">
@@ -157,8 +158,8 @@ export function RevenueSimulator() {
                     </div>
                     <input
                       type="number"
-                      value={daysPerYear}
-                      onChange={(e) => setDaysPerYear(Number(e.target.value) || daysPerYear)}
+                      value={daysPerMonth}
+                      onChange={(e) => setDaysPerMonth(Number(e.target.value) || daysPerMonth)}
                       className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
