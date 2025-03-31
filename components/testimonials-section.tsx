@@ -18,7 +18,7 @@ export function TestimonialsSection() {
     {
       quote:
         "J'ai connu Bridge via un ami qui m'a recommandé l'entreprise, après plusieurs échanges avec eux, j'ai pris la décision de signer avec Bridge en Décembre 2023 pour la suite de mon aventure, et je peux affirmer que je ne le regrette pas du tout! Ce que j'apprécie chez bridge c'est le sens de l'écoute, la réactivité et le professionnalisme des différentes personnes au quotidien, j'en suis plus que satisfait et je n'hésiterai pas à recommander cette entreprise à mon entourage..",
-      name: "Abdelghani C",
+      name: "Abdelghani. C",
       title: "Product Manager",
       image: "/placeholder.svg?height=80&width=80",
       initial: "A",
@@ -134,7 +134,7 @@ export function TestimonialsSection() {
                   </motion.div>
                   {currentTestimonial && (
                     <motion.h3
-                      className="text-xl font-bold text-[#0A2272] mb-2"
+                      className="text-xl font-bold text-[#0A2272] mb-2 whitespace-nowrap"
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.3, duration: 0.3 }}
@@ -144,7 +144,7 @@ export function TestimonialsSection() {
                   )}
                   {currentTestimonial && (
                     <motion.p
-                      className="text-gray-600"
+                      className="text-gray-600 whitespace-nowrap"
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.4, duration: 0.3 }}

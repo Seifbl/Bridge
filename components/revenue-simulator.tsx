@@ -21,52 +21,51 @@ function getTauxIRMensuel(salaireNetMensuel: number): number {
     [3983, 4648, 0.138],
     [4648, 5574, 0.158],
     [5574, 6974, 0.179],
-    [6974, 8711, 0.20],
+    [6974, 8711, 0.2],
     [8711, 12091, 0.24],
     [12091, 16376, 0.28],
     [16376, 25706, 0.33],
     [25706, 55062, 0.38],
-    [55062, Infinity, 0.43],
-  ];
+    [55062, Number.POSITIVE_INFINITY, 0.43],
+  ]
 
   for (const [min, max, taux] of tranches) {
     if (salaireNetMensuel >= min && salaireNetMensuel < max) {
-      return taux;
+      return taux
     }
   }
 
-  return 0;
+  return 0
 }
 
 function calculateOptimizedNetRevenue(tjm: number, joursParMois: number): number {
-  const j = 34926;
-  const ppv = 3000;
-  const joursParAn = joursParMois * 12;
+  const j = 34926
+  const ppv = 3000
+  const joursParAn = joursParMois * 12
 
-  const ca = tjm * joursParAn;
-  const dispoCa = ca * 0.95;
-  const dispoCaFicheDePaie = dispoCa - j;
+  const ca = tjm * joursParAn
+  const dispoCa = ca * 0.95
+  const dispoCaFicheDePaie = dispoCa - j
 
-  const fraisDeFonctionnement = Math.round(dispoCaFicheDePaie * 0.2 * 100) / 100;
-  const primeRC = Math.round(dispoCaFicheDePaie * 0.0125 * 100) / 100;
+  const fraisDeFonctionnement = Math.round(dispoCaFicheDePaie * 0.2 * 100) / 100
+  const primeRC = Math.round(dispoCaFicheDePaie * 0.0125 * 100) / 100
 
-  const dispoCaPourSalaire = dispoCaFicheDePaie - fraisDeFonctionnement - primeRC - ppv;
+  const dispoCaPourSalaire = dispoCaFicheDePaie - fraisDeFonctionnement - primeRC - ppv
 
-  const salaireBrut = Math.round((dispoCaPourSalaire / 1.45) * 100) / 100;
-  const salaireNetAvantIR = Math.round(salaireBrut * 0.786 * 100) / 100;
-  const salaireNetMensuelAvantIR = salaireNetAvantIR / 12;
+  const salaireBrut = Math.round((dispoCaPourSalaire / 1.45) * 100) / 100
+  const salaireNetAvantIR = Math.round(salaireBrut * 0.786 * 100) / 100
+  const salaireNetMensuelAvantIR = salaireNetAvantIR / 12
 
-  const tauxIR = getTauxIRMensuel(salaireNetMensuelAvantIR);
-  const salaireNetApresIR = Math.round(salaireNetAvantIR * (1 - tauxIR) * 100) / 100;
+  const tauxIR = getTauxIRMensuel(salaireNetMensuelAvantIR)
+  const salaireNetApresIR = Math.round(salaireNetAvantIR * (1 - tauxIR) * 100) / 100
 
-  const titresResto = Math.round(joursParAn * 12.4 * 100) / 100;
+  const titresResto = Math.round(joursParAn * 12.4 * 100) / 100
 
-  const revenuAnnuel =
-    salaireNetApresIR + titresResto + ppv + primeRC + fraisDeFonctionnement + j;
+  const revenuAnnuel = salaireNetApresIR + titresResto + ppv + primeRC + fraisDeFonctionnement + j
 
-  const revenuMensuel = Math.round((revenuAnnuel / 12) * 100) / 100;
+  const revenuMensuel = Math.round((revenuAnnuel / 12) * 100) / 100
 
-  return revenuMensuel;
+  return revenuMensuel
 }
 
 export function RevenueSimulator() {
@@ -124,7 +123,7 @@ export function RevenueSimulator() {
                       type="number"
                       value={dailyRate}
                       onChange={(e) => setDailyRate(Number(e.target.value) || dailyRate)}
-                      className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
+                      className="no-spinner w-36 rounded-[6px] bg-white px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                       <span className="text-black">€/jour</span>
@@ -134,9 +133,9 @@ export function RevenueSimulator() {
               </div>
 
               <div className="space-y-4">
-              <label className="block text-sm font-medium text-white">
-  Nombre de jours à facturer <strong>(par mois)</strong>
-</label>
+                <label className="block text-sm font-medium text-white">
+                  Nombre de jours à facturer <strong>(par mois)</strong>
+                </label>
 
                 <div className="flex items-center gap-4">
                   <Slider.Root
@@ -160,7 +159,7 @@ export function RevenueSimulator() {
                       type="number"
                       value={daysPerMonth}
                       onChange={(e) => setDaysPerMonth(Number(e.target.value) || daysPerMonth)}
-                      className="no-spinner w-32 rounded-[6px] bg-gray-300 px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
+                      className="no-spinner w-36 rounded-[6px] bg-white px-4 py-2 pl-10 text-black focus:outline-none focus:ring-2 focus:ring-[#C3FFFC]/50"
                     />
                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                       <span className="text-black">j/mois</span>
@@ -224,3 +223,4 @@ export function RevenueSimulator() {
     </div>
   )
 }
+
