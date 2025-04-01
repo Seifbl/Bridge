@@ -160,15 +160,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block">
-              <Image
-                src="/Bridge.png"
-                alt="Illustration de portage salarial"
-                width={500}
-                height={500}
-                className="mx-auto h-auto w-full rounded-lg "
-              />
-            </div>
+            <Image
+  src="/Bridge.png"
+  alt="Illustration de portage salarial"
+  width={500}
+  height={500}
+  unoptimized
+  className="mx-auto h-auto w-full rounded-lg"
+/>
+
           </div>
         </section>
       </div>
