@@ -5,7 +5,6 @@ import { Inter } from "next/font/google"
 import Script from "next/script"
 import AnalyticsTracker from "components/AnalyticsTracker"
 
-
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -27,6 +26,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+        <meta name="robots" content="index, follow" />
+
         {/* Google Analytics */}
         <Script
           strategy="afterInteractive"
@@ -48,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <AnalyticsTracker/>
+        <AnalyticsTracker />
         {children}
       </body>
     </html>
