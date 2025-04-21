@@ -14,6 +14,7 @@ import { LogoCarousel } from "components/logo-carousel"
 import { RevenueMaximization } from "components/revenue-maximization"
 import { RevenueSimulator } from "components/revenue-simulator"
 import { TestimonialsSection } from "components/testimonials-section"
+import CanonicalHead from "components/CanonicalHead"
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -48,6 +49,8 @@ export default function Home() {
   ]
 
   return (
+    <>
+          <CanonicalHead />
     <div className="min-h-screen overflow-x-hidden">
       <div className="bg-[url('/background.png')] bg-cover bg-center bg-no-repeat">
         {/* Header avec transition */}
@@ -264,6 +267,7 @@ export default function Home() {
       </main>
       <ContactFormModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </div>
+    </>
   )
 }
 

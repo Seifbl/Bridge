@@ -26,30 +26,29 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.bridgeportage.fr/" />
+        {/* SEO base */}
+        <meta name="robots" content="index, follow" />
 
-  {/* Google Analytics */}
-  <Script
-    strategy="afterInteractive"
-    src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-  />
-  <Script
-    id="ga-script"
-    strategy="afterInteractive"
-    dangerouslySetInnerHTML={{
-      __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${GA_TRACKING_ID}', {
-          page_path: window.location.pathname,
-        });
-      `,
-    }}
-  />
-</head>
-
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <Script
+          id="ga-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <AnalyticsTracker />
         {children}
