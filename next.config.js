@@ -26,20 +26,5 @@ module.exports = withBundleAnalyzer({
     ];
   },
 
-  async redirects() {
-    return [
-      // Redirection de la version sans www vers www
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: '^bridgeportage.fr$', // sans www
-          },
-        ],
-        destination: 'https://www.bridgeportage.fr/:path*',
-        permanent: true,
-      },
-    ];
-  },
+  // ✅ Supprimé la redirection ici, car gérée par Vercel
 });
