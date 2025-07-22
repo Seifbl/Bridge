@@ -15,6 +15,7 @@ import { RevenueMaximization } from "components/revenue-maximization"
 import { RevenueSimulator } from "components/revenue-simulator"
 import { TestimonialsSection } from "components/testimonials-section"
 import CanonicalHead from "components/CanonicalHead"
+import FAQSection from "components/faq-section"
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -204,8 +205,9 @@ export default function Home() {
         {/* Get Started Section */}
         <GetStartedSection />
 
+                   <FAQSection />
         {/* Footer */}
-        <footer className="bg-[#E7F3FE] py-4">
+        <footer className="bg-[#001C55] py-4">
           <div className="container mx-auto flex items-center justify-between px-4">
             <div className="font-[GlacialIndifferenc] text-sm text-gray-400">© Bridge 2025 , Tous droits réservés.</div>
             <div className="flex items-center gap-6">
@@ -264,6 +266,7 @@ export default function Home() {
             </div>
           </div>
         </footer>
+      
       </main>
       <ContactFormModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </div>

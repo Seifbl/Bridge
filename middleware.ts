@@ -4,18 +4,25 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl
+  const hostname = url.hostname
 
-  // ✅ Si le domaine ne commence pas par www, on redirige
-  if (url.hostname === 'bridgeportage.fr') {
+  // ✅ Rediriger vers www.bridgeportage.fr si le domaine est sans www
+  if (hostname === 'bridgeportage.fr') {
     url.hostname = 'www.bridgeportage.fr'
     return NextResponse.redirect(url)
   }
 
-  // ✅ Si le protocole est http, on redirige vers https
-  if (request.headers.get('x-forwarded-proto') === 'http') {
+  // ✅ Rediriger vers HTTPS uniquement si on n’est PAS en développement local
+  const isLocalhost =
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname.endsWith('.localhost')
+
+  if (!isLocalhost && request.headers.get('x-forwarded-proto') === 'http') {
     url.protocol = 'https:'
     return NextResponse.redirect(url)
   }
 
+  // ✅ Sinon, continuer normalement
   return NextResponse.next()
 }

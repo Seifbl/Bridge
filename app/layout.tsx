@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Bridge - Société de portage salarial",
   description:
-    "Profitez d'une stratégie d'optimisation de revenus, gérée par un conseiller dédié, adaptée à votre situation et qui évolue selon vos priorités.",
+    "Profitez d'une Maximisez vos revenus avec Bridge : Une optimisation sur mesure, un accompagnement personnalisé et des démarches simples et transparentes. d'optimisation de revenus, gérée par un conseiller dédié, adaptée à votre situation et qui évolue selon vos priorités.",
   icons: {
     icon: "/fav.png",
   },
